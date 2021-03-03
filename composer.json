@@ -1,0 +1,28 @@
+{
+	"name" : "portalium/portalium-core",
+	"description" : "Portalium is a Yii2 framework wrapper for developers",
+	"type" : "portalium-core",
+	"license": "MIT",
+	"homepage" : "https://portalium.dev",
+	"authors" : [
+		{
+			"name" : "Uğur YILDIZ",
+			"email" : "yildiz@diginova.com.tr",
+			"homepage" : "https://uguryildiz.net"
+		}
+	],
+	"support" : {
+		"issues" : "https://github.com/portalium/portalium-core/issues"
+    },
+    "require" : {
+        "yiisoft/yii2": "~2.0.15",
+        "yiisoft/yii2-bootstrap": "~2.0.0",
+        "yiisoft/yii2-swiftmailer": "~2.0.0"
+        
+    },
+	"autoload" : {
+		"psr-4" : {
+			"portalium\\" : ""
+		}
+	}
+}
