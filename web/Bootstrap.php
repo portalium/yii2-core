@@ -11,7 +11,7 @@ class Bootstrap extends BaseBootstrap
     public function beforeRun($app)
     {
         foreach ($this->getModules() as $id => $module) {
-            foreach ($module->apiRules as $rule) {
+            foreach (($app->id == 'api') ? $module->apiRules : $module->urlRules as $rule) {
                     $this->rules[] = $rule;
             }
         }
