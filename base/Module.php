@@ -9,6 +9,7 @@ use portalium\site\models\Setting;
 class Module extends \yii\base\Module
 {
     public $apiRules = [];
+    public $urlRules = [];
 
     public function init()
     {
