@@ -18,7 +18,7 @@ class Module extends \yii\base\Module
         $this->controllerNamespace = $this->controllerNamespace  . '\\' . Yii::$app->id;
         if(Yii::$app instanceof \portalium\web\Application)
             Yii::$app->language = (Yii::$app->session->get('lang') != "") ? Yii::$app->session->get('lang') : Setting::findOne(['name' => 'app::language'])->value ;
-        
+
         static::moduleInit();
     }
 
@@ -33,6 +33,9 @@ class Module extends \yii\base\Module
     public function registerComponents()
     {
         return [];
+    }
+
+    public function registerEvents() {
     }
 
     public static function registerTranslation($prefix, $basePath, array $fileMap)
