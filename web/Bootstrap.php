@@ -14,6 +14,8 @@ class Bootstrap extends BaseBootstrap
             foreach (($app->id == 'api') ? $module->apiRules : $module->urlRules as $rule) {
                     $this->rules[] = $rule;
             }
+
+            $module->registerEvents();
         }
     }
 
