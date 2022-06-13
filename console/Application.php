@@ -17,7 +17,7 @@ class Application extends \yii\console\Application
             'help' => 'yii\console\controllers\HelpController',
             'message' => 'yii\console\controllers\MessageController',
             'serve' => 'yii\console\controllers\ServeController',
-            'migrate' => 'yii\console\controllers\MigrateController',
+            'migrate' => 'yii\console\controllers\MigrateController'
         ];
     }
 
