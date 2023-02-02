@@ -11,13 +11,13 @@ class Application extends \yii\console\Application
     public function coreCommands()
     {
         return [
-            'asset' => 'yii\console\controllers\AssetController',
-            'cache' => 'yii\console\controllers\CacheController',
-            'fixture' => 'yii\console\controllers\FixtureController',
-            'help' => 'yii\console\controllers\HelpController',
-            'message' => 'yii\console\controllers\MessageController',
-            'serve' => 'yii\console\controllers\ServeController',
-            'migrate' => 'yii\console\controllers\MigrateController'
+            'asset' => 'portalium\console\controllers\AssetController',
+            'cache' => 'portalium\console\controllers\CacheController',
+            'fixture' => 'portalium\console\controllers\FixtureController',
+            'help' => 'portalium\console\controllers\HelpController',
+            'message' => 'portalium\console\controllers\MessageController',
+            'serve' => 'portalium\console\controllers\ServeController',
+            'migrate' => 'portalium\console\controllers\MigrateController'
         ];
     }
 
@@ -25,6 +25,7 @@ class Application extends \yii\console\Application
     {
         return array_merge($this->portaliumCoreComponents(), [
             'errorHandler' => ['class' => 'portalium\console\ErrorHandler'],
+            'param' => ['class' => 'portalium\components\Param'],
         ]);
     }
 }
