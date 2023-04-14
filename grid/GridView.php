@@ -1,8 +1,6 @@
 <?php
 namespace portalium\grid;
 
-
-
 class GridView extends \yii\grid\GridView
 {
     public $paginationParams;
