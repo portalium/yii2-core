@@ -1,5 +1,5 @@
 {
-	"name" : "portalium/portalium-core",
+	"name" : "portalium/yii2-core",
 	"description" : "Portalium is a Yii2 framework wrapper for developers",
 	"type" : "portalium-core",
 	"license": "MIT",
@@ -12,7 +12,7 @@
 		}
 	],
 	"support" : {
-		"issues" : "https://github.com/portalium/portalium-core/issues"
+		"issues" : "https://github.com/portalium/yii2-core/issues"
     },
     "require" : {
         "yiisoft/yii2": "~2.0.15",
