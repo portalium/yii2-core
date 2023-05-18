@@ -20,10 +20,7 @@ abstract class Controller extends \yii\web\Controller
                     [
                         'actions' => ['*'],
                         'allow' => false,
-                        'roles' => ['?'],
-                        'denyCallback' => function () {
-                            Yii::$app->response->redirect(['/site/auth/login']);
-                        },
+                        'roles' => ['?']
                     ],
                 ],
             ],
@@ -46,14 +43,5 @@ abstract class Controller extends \yii\web\Controller
         }
 
         return parent::getViewPath();
-    }
-
-    public function beforeAction($action)
-    {
-        if (Yii::$app->user->isGuest && $this->id != 'auth') {
-            return $this->redirect(['/site/auth/login']);
-        }
-        
-        return parent::beforeAction($action);
     }
 }
