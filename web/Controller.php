@@ -44,15 +44,15 @@ abstract class Controller extends \yii\web\Controller
             $currentModuleId = strtolower(Yii::$app->controller->module->id);
             $currentControllerId = ucfirst(Yii::$app->controller->id);
             $currentActionId = ucfirst(Yii::$app->controller->action->id);
-            foreach ($rootModules as $rootModule => $modules){
-                if (isset($modules[$currentModuleId][$currentControllerId][$currentActionId])) {
-                    $requiredPermission = $modules[$currentModuleId][$currentControllerId][$currentActionId];
-                    if (!Yii::$app->user->can($requiredPermission)) {
-                        throw new \yii\web\ForbiddenHttpException(Yii::t('site', 'You are not allowed to perform this action.'));
+            if ($rootModules !== null && is_array($rootModules))
+                foreach ($rootModules as $rootModule => $modules) {
+                    if (isset($modules[$currentModuleId][$currentControllerId][$currentActionId])) {
+                        $requiredPermission = $modules[$currentModuleId][$currentControllerId][$currentActionId];
+                        if (!Yii::$app->user->can($requiredPermission)) {
+                            throw new \yii\web\ForbiddenHttpException(Yii::t('site', 'You are not allowed to perform this action.'));
+                        }
                     }
                 }
-            }
-            
         }
 
         return parent::beforeAction($action);
