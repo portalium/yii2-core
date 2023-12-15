@@ -34,7 +34,9 @@ trait ApplicationTrait
     public function portaliumCoreComponents()
     {
         return array_merge(parent::coreComponents(), [
-            'mailer' => ['class' => 'portalium\components\Mailer'],
+            'mailer' => [
+                'class' => 'portalium\site\components\Mailer',
+            ],
         ]);
     }
 
