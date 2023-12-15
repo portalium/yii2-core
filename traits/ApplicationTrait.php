@@ -33,11 +33,7 @@ trait ApplicationTrait
 
     public function portaliumCoreComponents()
     {
-        return array_merge(parent::coreComponents(), [
-            'mailer' => [
-                'class' => 'portalium\site\components\Mailer',
-            ],
-        ]);
+        return array_merge(parent::coreComponents(), []);
     }
 
     public function getApplicationModules()
