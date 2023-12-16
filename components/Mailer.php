@@ -3,10 +3,10 @@
 namespace portalium\components;
 
 use yii\helpers\ArrayHelper;
-use yii\swiftmailer\Mailer as SwiftMailer;
 use portalium\site\models\Setting;
+use yii\symfonymailer\Mailer as SymfonymailerMailer;
 
-class Mailer extends SwiftMailer
+class Mailer extends SymfonymailerMailer
 {
     public function init()
     {
