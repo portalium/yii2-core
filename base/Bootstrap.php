@@ -41,7 +41,7 @@ abstract class Bootstrap implements BootstrapInterface
     private function registerModules($app)
     {
         foreach ($this->getModules() as $id => $module) {
-            Yii::setAlias('@portalium/'.$id, $module->getBasePath());
+            Yii::setAlias('@portalium/' . $id, $module->getBasePath());
 
             foreach ($module->registerComponents() as $componentId => $definition) {
                 if (!$app->has($componentId)) {
@@ -51,6 +51,8 @@ abstract class Bootstrap implements BootstrapInterface
 
             $module->portaliumBootstrap($app);
         }
+        foreach ($this->getModules() as $module) 
+            $module::moduleInit();
     }
 
     abstract public function beforeRun($app);
