@@ -13,10 +13,31 @@ class GridView extends \yii\grid\GridView
                 'class' => 'pagination justify-content-end',
             ],
         ];
-
-        $this->layout = "{items}<div class='row'><div class='col-md-6'>{summary}</div><div class='col-md-6'>{pager}</div></div>";
+        // $this->layout = "{items}<div class='panel-footer d-flex justify-content-between' style='margin-right:-10px;margin-left:-10px;'>{summary}{pager}</div>";
+        // $this->layout = "{items}<div class='panel-footer d-flex justify-content-between'>{summary}{pager}</div>";
     }
-
+    /**
+     * Renders a section of the specified name.
+     * If the named section is not supported, false will be returned.
+     * @param string $name the section name, e.g., `{summary}`, `{items}`.
+     * @return string|bool the rendering result of the section, or false if the named section is not supported.
+     */
+    public function renderSection($name)
+    {
+        switch ($name) {
+            case '{summary}':
+                break;
+                // return $this->renderSummary();
+            case '{items}':
+                return $this->renderItems();
+            case '{pager}':
+                return "<div class='panel-footer d-flex justify-content-between' style='margin-right:-6px;margin-left:-6px;'>" . $this->renderSummary() . $this->renderPager() . "</div>";
+            case '{sorter}':
+                return $this->renderSorter();
+            default:
+                return false;
+        }
+    }
     public function renderPager()
     {
         $pager = parent::renderPager();
