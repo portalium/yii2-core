@@ -7,6 +7,7 @@ use yii\helpers\ArrayHelper;
 
 class ListView extends \yii\widgets\ListView
 {
+    public $pageSizer = [];
     public function init()
     {
         parent::init();
