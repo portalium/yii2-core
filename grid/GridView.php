@@ -1,8 +1,13 @@
 <?php
 namespace portalium\grid;
 
+use diginova\pagesizer\LinkPageSizer;
+use yii\helpers\ArrayHelper;
+
 class GridView extends \yii\grid\GridView
 {
+    public $pageSizer = [];
+    
     public $paginationParams;
     public function init()
     {
@@ -25,17 +30,10 @@ class GridView extends \yii\grid\GridView
     public function renderSection($name)
     {
         switch ($name) {
-            case '{summary}':
-                break;
-                // return $this->renderSummary();
-            case '{items}':
-                return $this->renderItems();
-            case '{pager}':
-                return "<div class='panel-footer d-flex justify-content-between' style='margin-right:-6px;margin-left:-6px;'>" . $this->renderSummary() . $this->renderPager() . "</div>";
-            case '{sorter}':
-                return $this->renderSorter();
+            case "{pagesizer}":
+                return $this->renderPagesizer();
             default:
-                return false;
+                return parent::renderSection($name);
         }
     }
     public function renderPager()
@@ -65,6 +63,23 @@ class GridView extends \yii\grid\GridView
     }
 
 
+/**
+     * Renders the page sizer.
+     * @return string the rendering result
+     */
+    public function renderPagesizer()
+    {
+        $pagination = $this->dataProvider->getPagination();
+        if ($pagination === false || $this->dataProvider->getCount() <= 0) {
+            return '';
+        }
+        /* @var $class LinkPageSizer */
+        $pageSizer = $this->pageSizer;
+        $class = ArrayHelper::remove($pageSizer, 'class', LinkPageSizer::className());
+        $pageSizer['pagination'] = $pagination;
+        $pageSizer['view'] = $this->getView();
 
+        return $class::widget($pageSizer);
+    }
     
 }
