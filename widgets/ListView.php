@@ -23,6 +23,8 @@ class ListView extends \yii\widgets\ListView
         switch ($name) {
             case "{pagesizer}":
                 return $this->renderPagesizer();
+            case '{summary}':
+                return '<div class="d-flex align-items-center">' . parent::renderSummary() . '</div>';
             default:
                 return parent::renderSection($name);
         }

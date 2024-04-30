@@ -1,4 +1,5 @@
 <?php
+
 namespace portalium\grid;
 
 use diginova\pagesizer\LinkPageSizer;
@@ -7,7 +8,7 @@ use yii\helpers\ArrayHelper;
 class GridView extends \yii\grid\GridView
 {
     public $pageSizer = [];
-    
+
     public $paginationParams;
     public function init()
     {
@@ -32,6 +33,8 @@ class GridView extends \yii\grid\GridView
         switch ($name) {
             case "{pagesizer}":
                 return $this->renderPagesizer();
+            case '{summary}':
+                return '<div class="d-flex align-items-center">' . parent::renderSummary() . '</div>';
             default:
                 return parent::renderSection($name);
         }
@@ -63,7 +66,7 @@ class GridView extends \yii\grid\GridView
     }
 
 
-/**
+    /**
      * Renders the page sizer.
      * @return string the rendering result
      */
@@ -81,5 +84,4 @@ class GridView extends \yii\grid\GridView
 
         return $class::widget($pageSizer);
     }
-    
 }
