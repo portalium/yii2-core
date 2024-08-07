@@ -51,23 +51,13 @@ abstract class Controller extends \yii\web\Controller
                 foreach ($rootModules as $rootModule => $modules) {
                     if (isset($modules[$currentModuleId][$currentControllerId][$currentActionId])) {
                         $requiredPermissions = $modules[$currentModuleId][$currentControllerId][$currentActionId];
-                        /* if (!Yii::$app->user->can($requiredPermission)) {
-                            if (!Yii::$app->request->isAjax) {
-                                throw new \yii\web\ForbiddenHttpException(Yii::t('site', 'You are not allowed to perform this action.'));
-                            } else {
-                                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-                                throw new \yii\web\ForbiddenHttpException(Yii::t('site', 'You are not allowed to perform this action.'));
-                            }
-                        } */
                         $isAccess = null;
                         foreach ($requiredPermissions as $requiredPermission) {
-                            if (!Yii::$app->user->can($requiredPermission)) {
+                            if (!Yii::$app->workspace->can($currentModuleId,$requiredPermission) && !Yii::$app->user->can($requiredPermission)) {
                                 $isAccess = false;
                                 if (!Yii::$app->request->isAjax) {
-                                    // throw new \yii\web\ForbiddenHttpException(Yii::t('site', 'You are not allowed to perform this action.'));
                                 } else {
                                     Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-                                    // throw new \yii\web\ForbiddenHttpException(Yii::t('site', 'You are not allowed to perform this action.'));
                                 }
                             } else {
                                 $isAccess = true;
@@ -80,7 +70,6 @@ abstract class Controller extends \yii\web\Controller
                     }
                 }
         }
-
         return parent::beforeAction($action);
     }
 
