@@ -8,6 +8,9 @@ class ActionColumn extends \yii\grid\ActionColumn
     public function init()
     {
         $this->headerOptions = ['class' => 'col-md-2'];
+        if ($this->header === null) {
+            $this->header = Yii::t('yii', 'Actions');
+        }
         parent::init();
     }
 
