@@ -1,4 +1,5 @@
 <?php
+
 namespace portalium\base;
 
 use Yii;
@@ -16,27 +17,35 @@ class Module extends \yii\base\Module
         parent::init();
 
         $this->controllerNamespace = $this->controllerNamespace  . '\\' . Yii::$app->id;
-        if(Yii::$app instanceof \portalium\web\Application)
-            Yii::$app->language = (Yii::$app->session->get('lang') != "") ? Yii::$app->session->get('lang') : Setting::findOne(['name' => 'app::language'])->value ;
+        if (Yii::$app instanceof \portalium\web\Application) {
+            Yii::$app->language = (Yii::$app->session->get('lang') != "") ? Yii::$app->session->get('lang') : Setting::findOne(['name' => 'app::language'])->value;
+        }
+
+        if (static::getTimeZone() !== null) {
+            Yii::$app->timeZone = static::getTimeZone();
+        }
+
 
         static::moduleInit();
     }
-
-    public static function moduleInit()
+    public static function getTimeZone()
     {
+
+        $setting = Setting::findOne(['name' => 'site::timezone']);
+
+        return $setting ? $setting->value : null;
     }
 
-    public function portaliumBootstrap(Application $app)
-    {
-    }
+    public static function moduleInit() {}
+
+    public function portaliumBootstrap(Application $app) {}
 
     public function registerComponents()
     {
         return [];
     }
 
-    public function registerEvents() {
-    }
+    public function registerEvents() {}
 
     public static function registerTranslation($prefix, $basePath, array $fileMap)
     {
