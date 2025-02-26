@@ -20,20 +20,8 @@ class Module extends \yii\base\Module
         if (Yii::$app instanceof \portalium\web\Application) {
             Yii::$app->language = (Yii::$app->session->get('lang') != "") ? Yii::$app->session->get('lang') : Setting::findOne(['name' => 'app::language'])->value;
         }
-
-        if (static::getTimeZone() !== null) {
-            Yii::$app->timeZone = static::getTimeZone();
-        }
-
-
+        Yii::$app->timeZone = (Yii::$app->session->get('timezone') != "") ? Yii::$app->session->get('timezone') : Setting::findOne(['name' => 'site::timezone'])->value;
         static::moduleInit();
-    }
-    public static function getTimeZone()
-    {
-
-        $setting = Setting::findOne(['name' => 'site::timezone']);
-
-        return $setting ? $setting->value : null;
     }
 
     public static function moduleInit() {}
