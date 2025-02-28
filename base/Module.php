@@ -20,7 +20,7 @@ class Module extends \yii\base\Module
         if (Yii::$app instanceof \portalium\web\Application) {
             Yii::$app->language = (Yii::$app->session->get('lang') != "") ? Yii::$app->session->get('lang') : Setting::findOne(['name' => 'app::language'])->value;
         }
-        Yii::$app->timeZone = (Yii::$app->session->get('timezone') != "") ? Yii::$app->session->get('timezone') : Setting::findOne(['name' => 'site::timezone'])->value;
+        Yii::$app->timeZone = Setting::findOne(['name' => 'site::timezone'])->value;
         static::moduleInit();
     }
 
