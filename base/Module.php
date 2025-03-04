@@ -19,6 +19,13 @@ class Module extends \yii\base\Module
         if(Yii::$app instanceof \portalium\web\Application)
             Yii::$app->language = (Yii::$app->session->get('lang') != "") ? Yii::$app->session->get('lang') : Setting::findOne(['name' => 'app::language'])->value ;
 
+        if (Yii::$app->db->schema->getTableSchema(\portalium\site\Module::$tablePrefix . 'setting', true) !== null && $timezoneSetting = Setting::findOne(['name' => 'site::timezone'])) {
+            if ($timezoneSetting !== null && !empty($timezoneSetting->value)) {
+                Yii::$app->timeZone = $timezoneSetting->value;
+            } else {
+                Yii::$app->timeZone = 'UTC';
+            }
+        }
         static::moduleInit();
     }
 
