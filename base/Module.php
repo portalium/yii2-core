@@ -26,6 +26,7 @@ class Module extends \yii\base\Module
                 Yii::$app->timeZone = 'UTC';
             }
         }
+
         static::moduleInit();
     }
 
