@@ -28,15 +28,6 @@ abstract class Controller extends \yii\web\Controller
         ];
     }
 
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-        ];
-    }
-
     public function beforeAction($action)
     {
         if (Yii::$app->getModule('site')) {
@@ -46,28 +37,17 @@ abstract class Controller extends \yii\web\Controller
             $currentActionId = ucfirst(Yii::$app->controller->action->id);
             if (str_contains($currentActionId, '-'))
                 $currentActionId = str_replace('-', '', ucwords($currentActionId, '-'));
-
             if ($rootModules !== null && is_array($rootModules))
                 foreach ($rootModules as $rootModule => $modules) {
                     if (isset($modules[$currentModuleId][$currentControllerId][$currentActionId])) {
                         $requiredPermissions = $modules[$currentModuleId][$currentControllerId][$currentActionId];
-                        /* if (!Yii::$app->user->can($requiredPermission)) {
-                            if (!Yii::$app->request->isAjax) {
-                                throw new \yii\web\ForbiddenHttpException(Yii::t('site', 'You are not allowed to perform this action.'));
-                            } else {
-                                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-                                throw new \yii\web\ForbiddenHttpException(Yii::t('site', 'You are not allowed to perform this action.'));
-                            }
-                        } */
                         $isAccess = null;
                         foreach ($requiredPermissions as $requiredPermission) {
-                            if (!Yii::$app->user->can($requiredPermission)) {
+                            if (!Yii::$app->user->can($requiredPermission) && !Yii::$app->workspace->can($currentModuleId, $requiredPermission)) {
                                 $isAccess = false;
                                 if (!Yii::$app->request->isAjax) {
-                                    // throw new \yii\web\ForbiddenHttpException(Yii::t('site', 'You are not allowed to perform this action.'));
                                 } else {
                                     Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-                                    // throw new \yii\web\ForbiddenHttpException(Yii::t('site', 'You are not allowed to perform this action.'));
                                 }
                             } else {
                                 $isAccess = true;
@@ -80,7 +60,6 @@ abstract class Controller extends \yii\web\Controller
                     }
                 }
         }
-
         return parent::beforeAction($action);
     }
 

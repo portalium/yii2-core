@@ -30,8 +30,6 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
             $this->pagination->pageSize = isset(Yii::$app->request->queryParams[$pageParam]) ? Yii::$app->request->queryParams[$pageParam] : $sessionPageSize;
             Yii::$app->session->set('theme::page_size', $this->pagination->pageSize);
         }
-//         Yii::warning('theme::page_size: ' . $this->pagination->pageSize);
-//        Yii::$app->session->set('theme::page_size', $this->pagination->pageSize);
         return parent::prepareModels();
     }
 }
